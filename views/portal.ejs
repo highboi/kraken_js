@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Astro!</title>
+		<link rel="stylesheet" type="text/css" href="/style/main.css">
+	</head>
+	<body>
+		<div id="eventlistener" style="display: none;"></div>
+
+		<div id="banner-top">
+			<img src="/icons/astro.png">
+			<div id="peerid">CONNECTING TO NETWORK...</div>
+			<div id="text-log"></div>
+		</div>
+
+		<div id="feed">
+			
+		</div>
+
+		<div id="banner-bottom">
+			<div class="icon">
+				<img src="/icons/astro_text.png">
+				<p>Make Text!</p>
+			</div>
+
+			<%- include('./templates/text_upload.ejs') %>
+
+			<div class="icon">
+				<img src="/icons/astro_video.png">
+				<p>Upload Videos!</p>
+			</div>
+
+			<%- include('./templates/video_upload.ejs') %>
+
+			<div class="icon">
+				<img src="/icons/astro_image.png">
+				<p>Upload Images!</p>
+			</div>
+
+			<%- include('./templates/image_upload.ejs') %>
+
+			<div class="icon">
+				<img src="/icons/astro_record.png">
+				<p>Upload Audio!</p>
+			</div>
+
+			<%- include('./templates/audio_upload.ejs') %>
+		</div>
+
+		<script type="text/javascript" src="/javascript/tsunami.js"></script>
+	</body>
+</html>

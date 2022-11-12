@@ -195,7 +195,7 @@ async function Tsunami() {
 	};
 
 	//a function for broadcasting a key-value pair to all peers for syncing
-	tsunamiDB.putData = async (key, data, echo=2) => {
+	tsunamiDB.putData = async (key, data, echo=0) => {
 		//store this data locally first for efficiency
 		localStorage.setItem(key, JSON.stringify(data));
 
@@ -226,7 +226,7 @@ async function Tsunami() {
 	};
 
 	//a function for broadcasting a get message to get data from peers if available
-	tsunamiDB.getData = async (key, echo=2) => {
+	tsunamiDB.getData = async (key, echo=0) => {
 		//get local data first before requesting peers
 		var localdata = tsunamiDB.getLocalData(key);
 		if (localdata != null) {
@@ -674,45 +674,20 @@ async function Tsunami() {
 			resolve(tsunamiDB);
 		});
 	});
-
-	/*
-	//listen for the commready event to start interacting with data
-	commlistener.addEventListener("commready", (event) => {
-
-	});
-	*/
 }
 
 //execute the code for tsunami in an async function
 (async () => {
 	var tsunami = await Tsunami();
 
-	console.log(tsunami);
-	alert("DATA INTERACTION IS READY");
+	tsunami.textLog.innerHTML += "<br><br>**********<br>CONNECTED TO THE ASTRO NETWORK!!!<br>**********<br><br>";
+	document.getElementById("peerid").innerHTML = "CONNECTED TO NETWORK WITH PEER ID: " + tsunami.userid.toString();
 
-	/*
 	//set primitive data on the network
 	tsunami.putData("KEYEXAMPLE", {example: "data"});
 
-	//listen for file inputs
-	document.getElementById("file").oninput = async (event) => {
-		//upload a file to the network
-		await tsunami.torrentFile(event.target.files[0], "examplefile");
-
-		//download the torrent from the network
-		document.getElementById("torrentimg").src = await tsunami.downloadTorrent("examplefile");
-	}
-	*/
-
-	//generate a random color and send it to the other user
-	document.getElementById("random-color").addEventListener("click", async (event) => {
-		var red = Math.random() * 255;
-		var green = Math.random() * 255;
-		var blue = Math.random() * 255;
-
-		var color = `rgb(${red}, ${green}, ${blue})`;
-		document.getElementById("color-box").style.backgroundColor = color;
-
-		await tsunami.broadcastData(color);
-	});
+	//make sure the server removes the connection before closing the tab so that the network doesnt waste time trying to connect to a dead peer
+	window.onbeforeunload = (event) => {
+		//DISCONNECT FROM PEERS
+	};
 })();

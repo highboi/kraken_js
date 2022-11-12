@@ -17,7 +17,7 @@ app.use(express.static("views"));
 
 //a get path for connecting to the network
 app.get("/", async (req, res) => {
-	return res.render("room.ejs");
+	return res.render("portal.ejs");
 });
 
 //handle server upgrades to websockets

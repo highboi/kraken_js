@@ -1,0 +1,135 @@
+body {
+	background-color: var(--dark-grey);
+}
+
+/*
+STYLING THE TOP BANNER
+*/
+
+#banner-top {
+	width: 90vw;
+	height: auto;
+	max-height: 5vw;
+	margin: 0 auto;
+	text-align: center;
+	border: solid var(--green);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+#banner-top img {
+	width: 100px;
+	height: 100px;
+	border: solid var(--green);
+	border-radius: 10px;
+}
+
+#peerid {
+	color: var(--green);
+	font-size: 40px;
+}
+
+#text-log {
+	max-height: 100px;
+	color: var(--green);
+	overflow-y: scroll;
+	border: solid var(--green);
+}
+
+/*
+STYPING THE CONTENT FEED
+*/
+
+#feed {
+	color: var(--green);
+	margin: 0 auto;
+	text-align: center;
+	border: solid var(--green);
+	width: 90vw;
+	height: 20vw;
+	max-height: 40vw;
+	padding: 10px;
+}
+
+/*
+STYLING THE BOTTOM BANNER
+*/
+
+#banner-bottom {
+	width: 90vw;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	transform: translate(-50%, 0%);
+	left: 50%;
+	bottom: 0;
+	text-align: center;
+	border: solid var(--green);
+	padding: 10px;
+	color: var(--green);
+	background-color: var(--dark-grey);
+}
+
+#banner-bottom .icon {
+	background-color: var(--darkest-grey);
+	border: solid var(--green);
+	padding: 10px;
+}
+
+#banner-bottom .icon:hover {
+	transform: scale(2);
+}
+
+#banner-bottom .icon img {
+	width: 100px;
+	height: auto;
+	border: solid var(--green);
+}
+
+#banner-bottom .uploadform {
+	text-align: center;
+	margin: 0 auto;
+	background-color: var(--darkest-grey);
+	border: solid var(--green);
+	padding: 10px;
+	height: 300px;
+	width: 600px;
+	display: none;
+}
+
+#banner-bottom .uploadform input {
+	color: var(--green);
+	background-color: var(--dark-grey);
+	border: solid var(--green);
+	margin: 10px;
+}
+
+#banner-bottom .uploadform textarea {
+	color: var(--green);
+	background-color: var(--dark-grey);
+	border: solid var(--green);
+	margin: 10px;
+}
+
+#banner-bottom .uploadform button {
+	border: solid var(--green);
+	color: var(--green);
+	background-color: var(--dark-grey);
+}
+
+#banner-bottom .uploadform .filelabel {
+	border: solid var(--green);
+	background-color: var(--dark-grey);
+	padding: 5px;
+	margin: 5px;
+}
+
+#banner-bottom .uploadform input[type="file"]{
+	display: none;
+}
