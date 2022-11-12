@@ -312,7 +312,7 @@ async function Tsunami() {
 		var ledger_key = id + "_ledger";
 		await tsunamiDB.putData(ledger_key, {positions: positions, filetype: file.type});
 
-		return true;
+		return;
 	};
 
 	//a function for downloading a torrent from the network with a unique id
