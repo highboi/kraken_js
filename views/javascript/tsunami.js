@@ -1,3 +1,8 @@
+//a global variable to listen for custom events
+var commlistener = document.getElementById("eventlistener");
+commlistener.ready = false;
+commlistener.getdata = {};
+
 //function for initializing the tsunami db
 async function Tsunami() {
 			/*
@@ -20,11 +25,6 @@ async function Tsunami() {
 
 	//an object to define peer connections for webrtc
 	tsunamiDB.connections = {};
-
-	//a variable to listen for the commready event to start data interaction
-	var commlistener = document.getElementById("eventlistener");
-	commlistener.ready = false;
-	commlistener.getdata = {};
 
 
 
@@ -291,9 +291,10 @@ async function Tsunami() {
 
 		//divide the file data into fragments and store into an array
 		var fragments = [];
-		for (var byteindex = 0; byteindex < buffer.length; byteindex += 100) {
+		var frag_length = 50000;
+		for (var byteindex = 0; byteindex < buffer.length; byteindex += frag_length) {
 			//make a fragment object with the position, data, and associated url to be put into the fragments array
-			var fragment = buffer.slice(byteindex, byteindex+100);
+			var fragment = buffer.slice(byteindex, byteindex+frag_length);
 			fragments.push(fragment);
 		}
 
@@ -534,6 +535,13 @@ async function Tsunami() {
 					}
 				}
 
+				//fire an event for content uploads to the network
+				if (typeof data.value == 'string' && JSON.parse(data.value).event == "content-upload") {
+					var uploadEvent = new Event("content-upload");
+					commlistener.uploadedcontent = JSON.parse(data.value);
+					commlistener.dispatchEvent(uploadEvent);
+				}
+
 				break;
 
 			case "relay-get-response":
@@ -633,6 +641,14 @@ async function Tsunami() {
 					}
 				}
 
+
+				//fire an event for content uploads to the network
+				if (typeof data.value == 'string' && JSON.parse(data.value).event == "content-upload") {
+					var uploadEvent = new Event("content-upload");
+					commlistener.uploadedcontent = JSON.parse(data.value);
+					commlistener.dispatchEvent(uploadEvent);
+				}
+
 				break;
 
 			case "relay-get-response":
@@ -678,16 +694,199 @@ async function Tsunami() {
 
 //execute the code for tsunami in an async function
 (async () => {
+	/*
+	TSUNAMI SETUP
+	*/
 	var tsunami = await Tsunami();
 
+	//alert the user of their connection
 	tsunami.textLog.innerHTML += "<br><br>**********<br>CONNECTED TO THE ASTRO NETWORK!!!<br>**********<br><br>";
 	document.getElementById("peerid").innerHTML = "CONNECTED TO NETWORK WITH PEER ID: " + tsunami.userid.toString();
 
-	//set primitive data on the network
-	tsunami.putData("KEYEXAMPLE", {example: "data"});
+	//listen for content events
+	commlistener.addEventListener("content-upload", async (event) => {
+		var feed = document.getElementById("feed");
 
-	//make sure the server removes the connection before closing the tab so that the network doesnt waste time trying to connect to a dead peer
-	window.onbeforeunload = (event) => {
-		//DISCONNECT FROM PEERS
-	};
+		var parent = document.createElement("div");
+
+		switch(event.target.uploadedcontent.type) {
+			case "text":
+				var text_template = await fetch("/templates/text.html");
+
+				var text = await text_template.text();
+
+				text = text.replace("<% title %>", event.target.uploadedcontent.title);
+				text = text.replace("<% content %>", event.target.uploadedcontent.content);
+				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
+
+				feed.innerHTML += text;
+
+				break;
+			case "video":
+				var video_template = await fetch("/templates/video.html");
+
+				var text = await video_template.text();
+
+				//download video file
+				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
+
+				text = text.replace("<% title %>", event.target.uploadedcontent.title);
+				text = text.replace("<% content %>", fileurl);
+				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
+
+				feed.innerHTML += text;
+
+				break;
+			case "image":
+				var image_template = await fetch("/templates/image.html");
+
+				var text = await image_template.text();
+
+				//download image file
+				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
+
+				text = text.replace("<% title %>", event.target.uploadedcontent.title);
+				text = text.replace("<% content %>", fileurl);
+				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
+
+				feed.innerHTML += text;
+
+				break;
+			case "audio":
+				var audio_template = await fetch("/templates/audio.html");
+
+				var text = await audio_template.text();
+
+				//download audio
+				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
+
+				text = text.replace("<% title %>", event.target.uploadedcontent.title);
+				text = text.replace("<% content %>", fileurl);
+				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
+
+				feed.innerHTML += text;
+
+				break;
+		}
+	});
+
+
+
+
+	/*
+	FORM FUNCTIONALITY
+	*/
+
+	//upload text content
+	document.getElementById("textuploadbtn").addEventListener("click", async (event) => {
+		//get attributes of the form
+		var uploadObj = {
+			title: document.querySelector("#textupload #title").value,
+			content: document.querySelector("#textupload #body").value,
+			peerid: tsunami.userid,
+			type: "text",
+			event: "content-upload"
+		};
+
+		//make a unique id for this content
+		var contentid = Date.now().toString() + uploadObj.title;
+
+		//store the data on the network
+		await tsunami.putData(contentid, JSON.stringify(uploadObj));
+
+		var uploadEvent = new Event("content-upload");
+		commlistener.uploadedcontent = uploadObj;
+		commlistener.dispatchEvent(uploadEvent);
+	});
+
+	//upload video content
+	document.getElementById("videouploadbtn").addEventListener("click", async (event) => {
+		//generate a unique id for this content
+		var contentid = Date.now().toString() + document.querySelector("#videoupload #title").value;
+
+		//generate unique file id
+		var fileid = Date.now().toString() + document.querySelector("#videoupload #videofile").files[0].name;
+
+		//get form attributes
+		var uploadObj = {
+			title: document.querySelector("#videoupload #title").value,
+			content: fileid,
+			peerid: tsunami.userid,
+			type: "video",
+			event: "content-upload"
+		};
+
+		//torrent the file onto the network
+		await tsunami.torrentFile(document.querySelector("#videoupload #videofile").files[0], fileid);
+
+		//store the data on the network
+		await tsunami.putData(contentid, JSON.stringify(uploadObj));
+
+		var uploadEvent = new Event("content-upload");
+		commlistener.uploadedcontent = uploadObj;
+		commlistener.dispatchEvent(uploadEvent);
+	});
+
+	//upload image content
+	document.getElementById("imageuploadbtn").addEventListener("click", async (event) => {
+		//get the form
+		var imageform = document.getElementById("imageupload");
+
+		//generate a unique id for this content
+		var contentid = Date.now().toString() + document.querySelector("#imageupload #title").value;
+
+		//generate unique file id
+		var fileid = Date.now().toString() + document.querySelector("#imageupload #imagefile").files[0].name;
+
+		//get form attributes
+		var uploadObj = {
+			title: document.querySelector("#imageupload #title").value,
+			content: fileid,
+			peerid: tsunami.userid,
+			type: "image",
+			event: "content-upload"
+		};
+
+		//torrent the file onto the network
+		await tsunami.torrentFile(document.querySelector("#imageupload #imagefile").files[0], fileid);
+
+		//store the data on the network
+		await tsunami.putData(contentid, JSON.stringify(uploadObj));
+
+		var uploadEvent = new Event("content-upload");
+		commlistener.uploadedcontent = uploadObj;
+		commlistener.dispatchEvent(uploadEvent);
+	});
+
+	//upload audio content
+	document.getElementById("audiouploadbtn").addEventListener("click", async (event) => {
+		//generate a unique id for this content
+		var contentid = Date.now().toString() + document.querySelector("#audioupload #title").value;
+
+		//generate unique file id
+		var fileid = Date.now().toString() + document.querySelector("#audioupload #audiofile").files[0].name;
+
+		//get form attributes
+		var uploadObj = {
+			title: document.querySelector("#audioupload #title").value,
+			content: fileid,
+			peerid: tsunami.userid,
+			type: "audio",
+			event: "content-upload"
+		};
+
+		//torrent the file onto the network
+		await tsunami.torrentFile(document.querySelector("#audioupload #audiofile").files[0], fileid);
+
+		//store the data on the network
+		await tsunami.putData(contentid, JSON.stringify(uploadObj));
+
+		var uploadEvent = new Event("content-upload");
+		commlistener.uploadedcontent = uploadObj;
+		commlistener.dispatchEvent(uploadEvent);
+	});
 })();

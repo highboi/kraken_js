@@ -1,9 +1,13 @@
 <form id="textupload" class="uploadform">
-	<label for="title">Title:</label>
+	<h4 id="textuploaddragheader">(click me to drag)</h4>
+	<h2>Upload Text!</h2>
+
+	<label for="title">Title:</label><br>
 	<input id="title" name="title"><br>
 
 	<label for="body">Text Body:</label><br>
-	<textarea id="body" name="body"></textarea><br>
+	<textarea id="body" name="body" rows="10" cols="50"></textarea><br>
 
-	<button type="button" id="textuploadbtn">Upload to Network!</button>
+	<button type="button" id="textuploadbtn">Upload to Network!</button><br>
+	<button type="button" onclick="showElementDraggable('textupload')">Close</button>
 </form>

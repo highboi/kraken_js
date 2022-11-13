@@ -1,9 +1,13 @@
 <form id="videoupload" class="uploadform">
-	<label for="title">Title:</label>
-	<input id="title" name="title"><br>
+	<h4 id="videouploaddragheader">(click me to drag)</h4>
+	<h2>Upload a Video!</h2>
+
+	<label for="title">Title:</label><br>
+	<input id="title" name="title"><br><br>
 
 	<label for="videofile" class="filelabel">Upload Video</label><br>
 	<input id="videofile" name="videofile" type="file" accept="video/*"><br>
 
-	<button type="button" id="videouploadbtn">Upload to Network!</button>
+	<button type="button" id="videouploadbtn">Upload to Network!</button><br>
+	<button type="button" onclick="showElementDraggable('videoupload')">Close</button>
 </form>
