@@ -53,6 +53,22 @@ signalWss.on("connection", async (ws, req) => {
 				room[messagedata.userid] = {userid: messagedata.userid, socket: ws};
 
 				break;
+			case "disconnect":
+				console.log("PEER", messagedata.userid, "DISCONNECTING");
+
+				//remove this connection from the signal clients
+				delete global.signalClients[messagedata.userid];
+
+				var disconnectObj = JSON.stringify({userid: messagedata.userid, event: "disconnect"});
+
+				//send a message to the connected peers
+				for (var peer of messagedata.peerids) {
+					if (typeof global.signalClients[peer] != 'undefined') {
+						global.signalClients[peer].socket.send(disconnectObj);
+					}
+				}
+
+				break;
 			case "get-peers":
 				console.log("USER REQUESTING PEERS");
 
@@ -79,8 +95,6 @@ signalWss.on("connection", async (ws, req) => {
 
 				//make sure there are no duplicates
 				peerids = [...new Set(peerids)];
-
-				console.log(peerids);
 
 				//send peer ids to the user
 				var peersObj = JSON.stringify({event: "get-peers", peers: peerids, userid: messagedata.userid});
@@ -121,7 +135,9 @@ signalWss.on("connection", async (ws, req) => {
 				//send the ice candidate to all direct peers
 				var iceCandidate = JSON.stringify({event: "ice-exchange", candidate: messagedata.candidate, userid: messagedata.userid});
 				for (var peer of messagedata.peers) {
-					room[peer].socket.send(iceCandidate);
+					if (typeof room[peer] != 'undefined') {
+						room[peer].socket.send(iceCandidate);
+					}
 				}
 
 				break;

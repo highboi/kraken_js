@@ -291,7 +291,7 @@ async function Tsunami() {
 
 		//divide the file data into fragments and store into an array
 		var fragments = [];
-		var frag_length = 50000;
+		var frag_length = Math.round(buffer.length/10);
 		for (var byteindex = 0; byteindex < buffer.length; byteindex += frag_length) {
 			//make a fragment object with the position, data, and associated url to be put into the fragments array
 			var fragment = buffer.slice(byteindex, byteindex+frag_length);
@@ -377,6 +377,17 @@ async function Tsunami() {
 		switch (data.event) {
 			case "user-connected": //a new peer joined the network
 				tsunamiDB.textLog.innerHTML += "PEER JOINED ROOM<br>";
+
+				break;
+			case "disconnect":
+				//log this event
+				tsunamiDB.textLog.innerHTML += "PEER " + data.userid.toString() + " DISCONNECTING<br>";
+
+				//remove the peer id
+				delete tsunamiDB.peerids[tsunamiDB.peerids.indexOf(data.userid)];
+
+				//remove the connection
+				delete tsunamiDB.connections[data.userid];
 
 				break;
 			case "get-peers": //make new connections for each peer
@@ -686,6 +697,7 @@ async function Tsunami() {
 
 	//return a promise which resolves with the tsunami object when the connection is ready
 	return new Promise((resolve, reject) => {
+		console.log(tsunamiDB);
 		commlistener.addEventListener("commready", (event) => {
 			resolve(tsunamiDB);
 		});
@@ -703,6 +715,12 @@ async function Tsunami() {
 	tsunami.textLog.innerHTML += "<br><br>**********<br>CONNECTED TO THE ASTRO NETWORK!!!<br>**********<br><br>";
 	document.getElementById("peerid").innerHTML = "CONNECTED TO NETWORK WITH PEER ID: " + tsunami.userid.toString();
 
+	//remove the connection if the tab is being closed
+	window.addEventListener("beforeunload", (event) => {
+		var disconnectObj = JSON.stringify({event: "disconnect", userid: tsunami.userid, peerids: tsunami.peerids});
+		tsunami.signalSocket.send(disconnectObj);
+	});
+
 	//listen for content events
 	commlistener.addEventListener("content-upload", async (event) => {
 		var feed = document.getElementById("feed");
@@ -715,9 +733,15 @@ async function Tsunami() {
 
 				var text = await text_template.text();
 
+				//make an icon for the content type
+				var icon = document.createElement("img");
+				icon.id = "contenttype";
+				icon.title = "Text!"
+				icon.src = "/icons/astro_text.png";
+
 				text = text.replace("<% title %>", event.target.uploadedcontent.title);
 				text = text.replace("<% content %>", event.target.uploadedcontent.content);
-				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% contenttype %>", icon.outerHTML);
 				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
 
 				feed.innerHTML += text;
@@ -731,9 +755,15 @@ async function Tsunami() {
 				//download video file
 				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
 
+				//make an icon for the content type
+				var icon = document.createElement("img");
+				icon.id = "contenttype";
+				icon.title = "Video!";
+				icon.src = "/icons/astro_video.png";
+
 				text = text.replace("<% title %>", event.target.uploadedcontent.title);
 				text = text.replace("<% content %>", fileurl);
-				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% contenttype %>", icon.outerHTML);
 				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
 
 				feed.innerHTML += text;
@@ -747,9 +777,15 @@ async function Tsunami() {
 				//download image file
 				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
 
+				//make an icon for the content type
+				var icon = document.createElement("img");
+				icon.id = "contenttype";
+				icon.title = "Image!";
+				icon.src = "/icons/astro_image.png";
+
 				text = text.replace("<% title %>", event.target.uploadedcontent.title);
 				text = text.replace("<% content %>", fileurl);
-				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% contenttype %>", icon.outerHTML);
 				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
 
 				feed.innerHTML += text;
@@ -763,9 +799,15 @@ async function Tsunami() {
 				//download audio
 				var fileurl = await tsunami.downloadTorrent(event.target.uploadedcontent.content);
 
+				//make an icon for the content type
+				var icon = document.createElement(img);
+				icon.id = "contenttype";
+				icon.title = "Audio!"
+				icon.src = "/icons/astro_record.png";
+
 				text = text.replace("<% title %>", event.target.uploadedcontent.title);
 				text = text.replace("<% content %>", fileurl);
-				text = text.replace("<% contenttype %>", event.target.uploadedcontent.type);
+				text = text.replace("<% contenttype %>", icon.outerHTML);
 				text = text.replace("<% peerid %>", event.target.uploadedcontent.peerid);
 
 				feed.innerHTML += text;

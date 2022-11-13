@@ -73,15 +73,19 @@ STYPING THE CONTENT FEED
 	background-color: var(--dark-grey);
 }
 
+#feed .thumbnail #contenttype {
+	width: 50px;
+	height: 50px;
+	border: solid var(--green);
+}
+
 #feed .thumbnail img {
+	width: 100%;
 	object-fit: contain;
 }
 
 #feed .thumbnail video {
-	object-fit: contain;
-}
-
-#feed .thumbnail audio {
+	width: 100%;
 	object-fit: contain;
 }
 
