@@ -20,6 +20,16 @@ app.get("/", async (req, res) => {
 	return res.render("portal.ejs");
 });
 
+//a get path for testing compression algorithms for file uploads to the network
+app.get("/compress", async (req, res) => {
+	return res.render("compress.ejs");
+});
+
+//a get path for uploading code for compilation into .wasm files
+app.get("/compile", async (req, res) => {
+	return res.render("compiler.ejs");
+});
+
 //handle server upgrades to websockets
 server.on("upgrade", (req, socket, head) => {
 	var pathname = url.parse(req.url).pathname;

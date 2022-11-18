@@ -1,0 +1,29 @@
+body {
+	color: var(--green);
+	background-color: var(--dark-grey);
+}
+
+#compileform {
+	text-align: center;
+	margin: 0 auto;
+	border: solid var(--green);
+	background-color: var(--darkest-grey);
+	padding: 10px;
+	margin: 10px;
+}
+
+#terminal {
+	text-align: center;
+	margin: 0 auto;
+	border: solid var(--green);
+	color: var(--terminal-green);
+	background-color: black;
+	padding: 10px;
+	margin: 10px;
+}
+
+#runtime {
+	height: 500px;
+	overflow-y: scroll;
+	border: solid var(--terminal-green);
+}
