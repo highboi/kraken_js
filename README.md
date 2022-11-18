@@ -1,6 +1,18 @@
+# Kraken: Edge Computing and Data Analytics Software
+
+![Kraken Logo](https://github.com/highboi/kraken/blob/master/kraken_logo.png)
+
+Kraken is a software that aims to bring edge computing and data analytics to the big audience. Shifting away from the paradigm of big data for big institutions, Kraken has the potential
+to increase the utilization of data across all industries. By using browser technologies such as WebRTC and WebAssembly, the Kraken software can establish an "information network" which
+gathers, stores, manages, and analyzes data at the edge without the need for expensive computing infrastructure changes. This software will help industries that require physical
+interaction with the world especially. Kraken will be able to help scientific research, space exploration, military operations, and most notably blue-collar automation. By enabling
+companies to establish a completely vertically integrated data infrastructure, dealing with complex hardware systems becomes easier as you can write and deploy code on the network
+(write once, deploy everywhere). Development of the aforementioned fields will be accelerated through this ease-of-use.
+
+
 # Tsunami: The P2P Web Protocol
 
-![Tsunami Logo](https://github.com/highboi/tsunami/blob/master/tsunami_logo.png)
+![Tsunami Logo](https://github.com/highboi/kraken/blob/master/tsunami_logo.png)
 
 Tsunami aims to be a web protocol for the new age. Tsunami enables anyone to establish their own "information network" by running an instance of Tsunami on a server called a "beacon".
 Beacons allow for connections to be made between peers. After this, peers can manipulate data on the P2P network with a complete CRUD architecture (Create, Read, Update, Destroy).
