@@ -10,6 +10,7 @@ companies to establish a completely vertically integrated data infrastructure, d
 (write once, deploy everywhere). Development of the aforementioned fields will be accelerated through this ease-of-use.
 
 
+<!--
 # Tsunami: The P2P Web Protocol
 
 ![Tsunami Logo](https://github.com/highboi/kraken/blob/master/tsunami_logo.png)
@@ -19,3 +20,4 @@ Beacons allow for connections to be made between peers. After this, peers can ma
 Tsunami stores primitive data types and files similarly to torrents, fragmenting the data and distributing the data among the peer browsers using the LocalStorage API. Tsunami is
 the answer to the problem of big tech, anyone can establish their own information network that scales automatically. Make a custom social network with friends, make a custom cloud
 storage solution, make a networked cluster computer, do anything with P2P networks with Tsunami.
+-->
