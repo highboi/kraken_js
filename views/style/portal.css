@@ -1,10 +1,11 @@
 body {
-	background-color: black;
+	background-color: var(--darkest-purple);
 	font-family: monospace;
 }
 
 #portal {
-	
+	background-color: var(--darkest-purple);
+	padding: 10px;
 }
 
 /*
@@ -16,34 +17,34 @@ STYLING THE TOP BANNER
 	height: auto;
 	margin: 0 auto;
 	text-align: center;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px;
-	background-color: var(--dark-grey);
+	background-color: var(--dark-purple);
 }
 
 #banner-top img {
 	width: 100px;
 	height: 100px;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	border-radius: 10px;
 }
 
 #peerid {
-	color: var(--green);
+	color: var(--hot-pink);
 	font-size: 40px;
 }
 
 #text-log {
 	max-width: 300px;
 	max-height: 70px;
-	color: var(--green);
+	color: var(--hot-pink);
 	overflow-x: scroll;
 	overflow-y: scroll;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	padding: 10px;
 }
 
@@ -52,31 +53,31 @@ STYPING THE CONTENT FEED
 */
 
 #feed {
-	color: var(--green);
+	color: var(--hot-pink);
 	margin: 0 auto;
 	text-align: center;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	width: 90vw;
 	height: 60vh;
 	padding: 10px;
-	background-color: var(--darkest-grey);
+	background-color: var(--darkest-purple);
 	overflow-y: scroll;
 }
 
 #feed .thumbnail {
 	width: 600px;
 	height: auto;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	margin: 0 auto;
 	text-align: center;
 	padding: 10px;
-	background-color: var(--dark-grey);
+	background-color: var(--dark-purple);
 }
 
 #feed .thumbnail #contenttype {
 	width: 50px;
 	height: 50px;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 }
 
 #feed .thumbnail img {
@@ -102,10 +103,10 @@ STYLING THE BOTTOM BANNER
 	align-items: center;
 	text-align: center;
 	margin: 0 auto;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 	padding: 10px;
-	color: var(--green);
-	background-color: var(--dark-grey);
+	color: var(--hot-pink);
+	background-color: var(--dark-purple);
 }
 
 #banner-bottom > div {
@@ -117,8 +118,8 @@ STYLING THE BOTTOM BANNER
 }
 
 #banner-bottom .icon {
-	background-color: var(--darkest-grey);
-	border: solid var(--green);
+	background-color: var(--darkest-purple);
+	border: solid var(--hot-pink);
 	padding: 10px;
 	font-size: 15px;
 }
@@ -130,43 +131,43 @@ STYLING THE BOTTOM BANNER
 #banner-bottom .icon img {
 	width: 50px;
 	height: auto;
-	border: solid var(--green);
+	border: solid var(--hot-pink);
 }
 
 #banner-bottom .uploadform {
 	text-align: center;
 	margin: 0 auto;
-	background-color: var(--darkest-grey);
-	border: solid var(--green);
+	background-color: var(--darkest-purple);
+	border: solid var(--hot-pink);
 	padding: 10px;
 	display: none;
 	font-size: 20px;
 }	
 
 #banner-bottom .uploadform h4 {
-	background-color: var(--dark-grey);
-	border: solid var(--green);
+	background-color: var(--dark-purple);
+	border: solid var(--hot-pink);
 	padding: 10px;
 }
 
 #banner-bottom .uploadform input {
-	color: var(--green);
-	background-color: var(--dark-grey);
-	border: solid var(--green);
+	color: var(--hot-pink);
+	background-color: var(--dark-purple);
+	border: solid var(--hot-pink);
 	margin: 10px;
 }
 
 #banner-bottom .uploadform textarea {
-	color: var(--green);
-	background-color: var(--dark-grey);
-	border: solid var(--green);
+	color: var(--hot-pink);
+	background-color: var(--dark-purple);
+	border: solid var(--hot-pink);
 	margin: 10px;
 }
 
 #banner-bottom .uploadform button {
-	border: solid var(--green);
-	color: var(--green);
-	background-color: var(--dark-grey);
+	border: solid var(--hot-pink);
+	color: var(--hot-pink);
+	background-color: var(--dark-purple);
 	cursor: pointer;
 	margin: 5px;
 	padding: 5px;
@@ -174,8 +175,8 @@ STYLING THE BOTTOM BANNER
 }
 
 #banner-bottom .uploadform .filelabel {
-	border: solid var(--green);
-	background-color: var(--dark-grey);
+	border: solid var(--hot-pink);
+	background-color: var(--dark-purple);
 	padding: 5px;
 	margin: 20px;
 	cursor: pointer;
