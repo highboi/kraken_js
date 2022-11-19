@@ -1,6 +1,6 @@
 # Kraken: Edge Computing and Data Analytics Software
 
-![Kraken Logo](https://github.com/highboi/kraken/blob/master/views/icons/kraken_logo.png)
+![Kraken Logo](https://github.com/highboi/kraken/blob/master/kraken_logo_blue.png)
 
 Kraken is a software that aims to bring edge computing and data analytics to the big audience. Shifting away from the paradigm of big data for big institutions, Kraken has the potential
 to increase the utilization of data across all industries. By using browser technologies such as WebRTC and WebAssembly, the Kraken software can establish an "information network" which

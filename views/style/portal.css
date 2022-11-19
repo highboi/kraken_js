@@ -34,14 +34,14 @@ STYLING THE TOP BANNER
 }
 
 #peerid {
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	font-size: 40px;
 }
 
 #text-log {
 	max-width: 300px;
 	max-height: 70px;
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	overflow-x: scroll;
 	overflow-y: scroll;
 	border: solid var(--hot-pink);
@@ -53,7 +53,7 @@ STYPING THE CONTENT FEED
 */
 
 #feed {
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	margin: 0 auto;
 	text-align: center;
 	border: solid var(--hot-pink);
@@ -105,7 +105,7 @@ STYLING THE BOTTOM BANNER
 	margin: 0 auto;
 	border: solid var(--hot-pink);
 	padding: 10px;
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	background-color: var(--dark-purple);
 }
 
@@ -151,14 +151,14 @@ STYLING THE BOTTOM BANNER
 }
 
 #banner-bottom .uploadform input {
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	background-color: var(--dark-purple);
 	border: solid var(--hot-pink);
 	margin: 10px;
 }
 
 #banner-bottom .uploadform textarea {
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	background-color: var(--dark-purple);
 	border: solid var(--hot-pink);
 	margin: 10px;
@@ -166,7 +166,7 @@ STYLING THE BOTTOM BANNER
 
 #banner-bottom .uploadform button {
 	border: solid var(--hot-pink);
-	color: var(--hot-pink);
+	color: var(--light-blue);
 	background-color: var(--dark-purple);
 	cursor: pointer;
 	margin: 5px;

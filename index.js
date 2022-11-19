@@ -171,8 +171,6 @@ signalWss.on("connection", async (ws, req) => {
 
 				break;
 			case "relay-put":
-				console.log(messagedata);
-
 				console.log("PEER", messagedata.userid, "SETTING KEY-VALUE PAIR FOR", messagedata.recipient);
 
 				var room = global.signalClients;
