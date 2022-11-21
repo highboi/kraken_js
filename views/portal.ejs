@@ -30,10 +30,16 @@
 				</div>
 				<div class="page" id="wasm-upload">
 					<h1>WebAssembly (WASM) COMPILER</h1>
-					<form enctype="multipart/form-data" id="compileform">
+					<form method="post" action="/wasm-upload" enctype="multipart/form-data" id="compileform">
 						<h2>Upload Code for Compilation:</h2>
+
+						<label for="title">Name of Program:</label><br>
+						<input id="title" name="title" type="text"><br>
+
 						<label for="code" class="filelabel">Upload Code!</label><br>
-						<input id="code" name="code" type="file">
+						<input id="code" name="code" type="file"><br>
+
+						<button id="wasm-submit" type="button">Upload!</button>
 					</form>
 
 					<div id="terminal">
@@ -70,5 +76,6 @@
 
 		<script type="text/javascript" src="/javascript/tsunami.js"></script>
 		<script type="text/javascript" src="/javascript/menu.js"></script>
+		<script type="text/javascript" src="/javascript/wasm_upload.js"></script>
 	</body>
 </html>

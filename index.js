@@ -1,11 +1,11 @@
-//set up other libraries
-const { exec } = require("child_process");
-
-//global storage for signal clients
+//global storage for signal server clients
+global.appRoot = __dirname;
 global.signalClients = {};
 
-//custom imports
+//import the app and server
 const {app, server} = require("./servercode/configBasic");
+
+//import the code for signalling and the kraken portal
 require("./servercode/mainpath");
 
 //listen on port 3000
