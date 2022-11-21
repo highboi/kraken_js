@@ -8,6 +8,23 @@ body {
 	padding: 10px;
 }
 
+#portal h1 {
+	background-color: var(--purple);
+	padding: 10px;
+}
+
+#portal #network {
+
+}
+
+#portal #wasm-upload {
+	display: none;
+}
+
+#portal #wasm {
+	display: none;
+}
+
 /*
 STYLING THE TOP BANNER
 */
@@ -52,7 +69,7 @@ STYLING THE TOP BANNER
 STYPING THE CONTENT FEED
 */
 
-#feed {
+#panel {
 	color: var(--light-blue);
 	margin: 0 auto;
 	text-align: center;
@@ -64,30 +81,8 @@ STYPING THE CONTENT FEED
 	overflow-y: scroll;
 }
 
-#feed .thumbnail {
-	width: 600px;
-	height: auto;
+#panel .node {
 	border: solid var(--hot-pink);
-	margin: 0 auto;
-	text-align: center;
-	padding: 10px;
-	background-color: var(--dark-purple);
-}
-
-#feed .thumbnail #contenttype {
-	width: 50px;
-	height: 50px;
-	border: solid var(--hot-pink);
-}
-
-#feed .thumbnail img {
-	width: 100%;
-	object-fit: contain;
-}
-
-#feed .thumbnail video {
-	width: 100%;
-	object-fit: contain;
 }
 
 /*
