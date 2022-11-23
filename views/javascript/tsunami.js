@@ -739,7 +739,7 @@ async function Tsunami(attributes=null) {
 	var tsunami = await Tsunami({name: "example"});
 
 	//alert the user of their connection
-	tsunami.textLog.innerHTML += "<br><br>**********<br>CONNECTED TO THE ASTRO NETWORK!!!<br>**********<br><br>";
+	tsunami.textLog.innerHTML += "<br><br>**********<br>CONNECTED TO THE TSUNAMI NETWORK!!!<br>**********<br><br>";
 	document.getElementById("peerid").innerHTML = "CONNECTED TO NETWORK WITH PEER ID: " + tsunami.userid.toString();
 
 	//remove the connection if the tab is being closed

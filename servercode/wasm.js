@@ -19,8 +19,17 @@ app.post("/wasm-upload", async (req, res) => {
 	var wasmpath = global.appRoot + "/views/binaries/" + Date.now() + req.body.title + ".wasm"
 
 	//execute emscripten
-	//var result = exec(`emcc ${filepath} -o ${wasmpath}`);
-	//console.log(result);
+	var result = await new Promise((resolve, reject) => {
+		exec(`emcc ${filepath} -o ${wasmpath}`, (error, stdout, stderr) => {
+			if (error) {
+				console.error(`exec error: ${error}`);
+			}
 
-	return res.send({wasm: "/binaries/example.wasm"});
+			resolve(stdout);
+		});
+	});
+
+	//give the file for the client to access using a url
+	var wasmaccess = wasmpath.replace(global.appRoot + "/views", "");
+	return res.send({wasm: wasmaccess});
 });

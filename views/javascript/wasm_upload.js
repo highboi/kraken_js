@@ -13,5 +13,11 @@ document.querySelector("#compileform #wasm-submit").addEventListener("click", as
 	//get the response data (the url for the WASM file)
 	var responsedata = await response.json();
 
-	alert(responsedata.wasm);
+	//execute the webassembly file as an example
+	var wasmresponse = await fetch(responsedata.wasm);
+
+	console.log(wasmresponse);
+
+	var wasmresults = await WebAssembly.instantiateStreaming(wasmresponse);
+	console.log(wasmresults);
 });

@@ -29,18 +29,7 @@
 					<% } %>
 				</div>
 				<div class="page" id="wasm-upload">
-					<h1>WebAssembly (WASM) COMPILER</h1>
-					<form method="post" action="/wasm-upload" enctype="multipart/form-data" id="compileform">
-						<h2>Upload Code for Compilation:</h2>
-
-						<label for="title">Name of Program:</label><br>
-						<input id="title" name="title" type="text"><br>
-
-						<label for="code" class="filelabel">Upload Code!</label><br>
-						<input id="code" name="code" type="file"><br>
-
-						<button id="wasm-submit" type="button">Upload!</button>
-					</form>
+					<h1>WebAssembly (WASM) RUNTIME</h1>
 
 					<div id="terminal">
 						<h2>Code Runtime/Output:</h2>
@@ -50,7 +39,18 @@
 					</div>
 				</div>
 				<div class="page" id="wasm">
-					<h1>WebAssembly (WASM) BINARY SCHEDULER</h1>
+					<h1>WebAssembly (WASM) PROGRAM MANAGER</h1>
+					<form method="post" action="/wasm-upload" enctype="multipart/form-data" id="compileform">
+						<h2>WASM Compiler:</h2>
+
+						<label for="title">Name of Program:</label><br>
+						<input id="title" name="title" type="text"><br>
+
+						<label for="code" class="filelabel">Upload Code!</label><br>
+						<input id="code" name="code" type="file"><br>
+
+						<button id="wasm-submit" type="button">Upload!</button>
+					</form>
 				</div>
 			</div>
 
